@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tomoncle</groupId>
+    <artifactId>powerjob-worker</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>powerjob-worker-simple</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <!-- ************ * 开发者信息 * ************ -->
+    <developers>
+        <developer>
+            <id>tomoncle</id>
+            <name>tomoncle</name>
+            <email>tom@tomoncle.com</email>
+            <organization>tomoncle.com</organization>
+            <organizationUrl>https://www.tomoncle.com</organizationUrl>
+            <url>https://github.com/tomoncle</url>
+        </developer>
+    </developers>
+
+    <repositories>
+        <repository>
+            <!--  tomoncle's private maven repository.  -->
+            <id>tomoncle repository</id>
+            <name>tomoncle Repositories</name>
+            <url>https://maven.tomoncle.com</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <!--  snapshots repository.  -->
+            <id>tomoncle snapshots</id>
+            <name>tomoncle snapshots Repositories</name>
+            <url>https://snapshots-maven.tomoncle.com</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <!--  阿里云源  -->
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
+        </repository>
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <!--属性版本-->
+    <properties>
+        <!-- maven compiler -->
+        <maven-compiler.version>3.8.0</maven-compiler.version>
+        <java.version>1.8</java.version>
+        <file_encoding>UTF-8</file_encoding>
+        <surefire.test.skip>true</surefire.test.skip>
+        <updateReleaseInfo>true</updateReleaseInfo>
+        <project.build.sourceEncoding>${file_encoding}</project.build.sourceEncoding>
+        <lombok.version>1.18.12</lombok.version>
+    </properties>
+
+    <!--公共依赖-->
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- 插件配置 -->
+    <build>
+        <plugins>
+            <!-- compiler插件, 设定JDK版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!--<version>${maven-compiler.version}</version>-->
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

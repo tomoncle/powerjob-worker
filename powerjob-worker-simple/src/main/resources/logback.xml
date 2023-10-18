@@ -1,0 +1,30 @@
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--<property name="log_dir" value="d://data//logs//${system.key}" />-->
+    <property name="log_dir" value="${HOME:-/var}/log/powerJob-agent"/>
+    <property name="maxHistory" value="30"/>
+    <property name="maxFileSize" value="500MB"/>
+    <property name="totalSizeCap" value="20GB"/>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(%5p) %magenta(${PID:- }) --- %magenta([%12.12t]) %cyan(%-60.60logger{59}) %clr(: -->){faint} %m%n%wEx"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">          
+            <level>trace</level>
+        </filter>
+        <encoder>       
+            <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>    
+            <charset>UTF-8</charset>     
+        </encoder>
+    </appender>
+
+    <logger name="tech.powerjob" level="DEBUG"/>
+    <logger name="com.tomoncle" level="DEBUG"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
