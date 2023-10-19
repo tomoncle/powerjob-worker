@@ -42,41 +42,28 @@ import static okhttp3.MediaType.parse;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public final class OkHttpRequest {
 
-    public static final OkHttpRequest DEFAULT;
-    private static final Headers headers;
-    private static final MediaType JSON;
-    private static final MediaType FORM;
-    private static final MediaType OCTET_STREAM;
-    public static final X509TrustManager X_509_TRUST_MANAGER;
-    public static final OkHttpRequest.Get GET;
-    public static final OkHttpRequest.Post POST;
-    public static final OkHttpRequest.Put PUT;
-    public static final OkHttpRequest.Patch PATCH;
-    public static final OkHttpRequest.Delete DELETE;
-    public static final OkHttpRequest.Head HEAD;
-    public static final HostnameVerifier HOSTNAME_VERIFIER;
-    public static final TrustManager[] TRUST_MANAGERS;
-    private static OkHttpClient client;
+    public static final OkHttpRequest DEFAULT=new OkHttpRequest();
+
+    private static final MediaType JSON=parse("application/json; charset=utf-8");
+    private static final MediaType FORM=parse("application/x-www-form-urlencoded");
+    private static final MediaType OCTET_STREAM=parse("application/octet-stream");
+    public static final OkHttpRequest.Get GET= DEFAULT.new Get();
+    public static final OkHttpRequest.Post POST= DEFAULT.new Post();
+    public static final OkHttpRequest.Put PUT = DEFAULT.new Put();
+    public static final OkHttpRequest.Patch PATCH = DEFAULT.new Patch();
+    public static final OkHttpRequest.Delete DELETE= DEFAULT.new Delete();
+    public static final OkHttpRequest.Head HEAD= DEFAULT.new Head();
+    public static final HostnameVerifier HOSTNAME_VERIFIER=(s, sslSession) -> true;
+    public static final X509TrustManager X_509_TRUST_MANAGER= x509TrustManager();
+    public static final TrustManager[] TRUST_MANAGERS=new TrustManager[]{X_509_TRUST_MANAGER};
+    private static OkHttpClient client= getClient(false);
+    private static final Headers HEADERS;
 
 
     static {
-        client = getClient(false);
-        JSON = parse("application/json; charset=utf-8");
-        FORM = parse("application/x-www-form-urlencoded");
-        OCTET_STREAM = parse("application/octet-stream");
-        X_509_TRUST_MANAGER = x509TrustManager();
-        HOSTNAME_VERIFIER = (s, sslSession) -> true;
-        TRUST_MANAGERS = new TrustManager[]{X_509_TRUST_MANAGER};
-        DEFAULT = new OkHttpRequest();
-        GET = DEFAULT.new Get();
-        POST = DEFAULT.new Post();
-        PUT = DEFAULT.new Put();
-        PATCH = DEFAULT.new Patch();
-        DELETE = DEFAULT.new Delete();
-        HEAD = DEFAULT.new Head();
         HashMap<String, String> stringStringHashMap = new HashMap<>();
         stringStringHashMap.put("Accept", "*/*");
-        headers = Headers.of(stringStringHashMap);
+        HEADERS = Headers.of(stringStringHashMap);
     }
 
     private OkHttpRequest() {
@@ -131,7 +118,7 @@ public final class OkHttpRequest {
      * @return Headers
      */
     private static Headers buildHeaders(Headers headers) {
-        return null == headers ? OkHttpRequest.headers : headers;
+        return null == headers ? OkHttpRequest.HEADERS : headers;
     }
 
 

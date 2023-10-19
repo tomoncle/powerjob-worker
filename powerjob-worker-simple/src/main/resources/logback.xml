@@ -1,6 +1,6 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <!--<property name="log_dir" value="d://data//logs//${system.key}" />-->
-    <property name="log_dir" value="${HOME:-/var}/log/powerJob-agent"/>
+    <property name="log_dir" value="${HOME:-/var}/log/powerjob-worker-simple"/>
     <property name="maxHistory" value="30"/>
     <property name="maxFileSize" value="500MB"/>
     <property name="totalSizeCap" value="20GB"/>
